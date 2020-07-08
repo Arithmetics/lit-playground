@@ -1,25 +1,6 @@
-/**
- * @license
- * Copyright (c) 2019 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
-
 import {LitElement, html, customElement, property, css} from 'lit-element';
+import './cool-element';
 
-/**
- * An example element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
- */
 @customElement('my-element')
 export class MyElement extends LitElement {
   static styles = css`
@@ -31,34 +12,23 @@ export class MyElement extends LitElement {
     }
   `;
 
-  /**
-   * The name to say "Hello" to.
-   */
-  @property()
+  @property({type: String, reflect: true})
   name = 'World';
 
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({type: Number})
-  count = 0;
+  private onClick(newName: string): void {
+    console.log('cliked');
+    this.name = newName;
+  }
 
   render() {
     return html`
       <h1>Hello, ${this.name}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
-      <slot></slot>
+      <button @click=${() => this.onClick('World')}>World</button>
+      <button @click=${() => this.onClick('Yoyo')}>Yoyo</button>
+      <button @click=${() => this.onClick('Bongo')}>Bongo</button>
+      <button @click=${() => this.onClick('XXX')}>XXX</button>
+      <cool-element name=${this.name}></cool-element>
     `;
-  }
-
-  private _onClick() {
-    this.count++;
-  }
-
-  foo(): string {
-    return 'foo';
   }
 }
 
