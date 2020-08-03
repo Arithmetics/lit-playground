@@ -25,6 +25,9 @@ export class CoolElement extends LitElement {
   @property({type: String, attribute: true})
   name = '';
 
+  @property({type: String, attribute: true})
+  newBreak = 'default new break';
+
   renderedForm(): TemplateResult {
     return formLookup[this.name]?.template;
   }
@@ -33,14 +36,21 @@ export class CoolElement extends LitElement {
     return formLookup[this.name]?.extraMessage;
   }
 
+  radMan(x: string): number {
+    return 8 * Number(x);
+  }
+
+  onClick() {
+    this.newBreak = Math.random().toString();
+  }
+
   render(): TemplateResult {
     console.log(this.chosenMessage());
     return html`
+      <button @click=${this.onClick}>refresh new break</button>
       <p>given name ${this.name}</p>
-      <!-- ${this.name === 'World' ? html`<form-a></form-a>` : null}
-      ${this.name === 'Yoyo' ? html`<form-b></form-b>` : null}
-      ${this.name === 'Bongo' ? html`<form-c></form-c>` : null} -->
-      ${this.renderedForm()}
+      <!-- ${this.renderedForm()} -->
+      <form-c breakableTitle=${this.newBreak}></form-c>
     `;
   }
 }

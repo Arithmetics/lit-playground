@@ -1,6 +1,10 @@
-import { LitElement } from 'lit-element';
+import { LitElement, TemplateResult } from 'lit-element';
+import './breakable';
 export declare class FormC extends LitElement {
     name: string;
-    render(): import("lit-element").TemplateResult;
+    breakableTitle: string;
+    onClick(): void;
+    makeNewBreakable(): TemplateResult;
+    render(): TemplateResult;
 }
 //# sourceMappingURL=form-c.d.ts.map

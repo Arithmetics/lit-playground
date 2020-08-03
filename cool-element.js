@@ -17,6 +17,7 @@ let CoolElement = class CoolElement extends LitElement {
     constructor() {
         super(...arguments);
         this.name = '';
+        this.newBreak = 'default new break';
     }
     renderedForm() {
         var _a;
@@ -26,20 +27,28 @@ let CoolElement = class CoolElement extends LitElement {
         var _a;
         return (_a = formLookup[this.name]) === null || _a === void 0 ? void 0 : _a.extraMessage;
     }
+    radMan(x) {
+        return 8 * Number(x);
+    }
+    onClick() {
+        this.newBreak = Math.random().toString();
+    }
     render() {
         console.log(this.chosenMessage());
         return html `
+      <button @click=${this.onClick}>refresh new break</button>
       <p>given name ${this.name}</p>
-      <!-- ${this.name === 'World' ? html `<form-a></form-a>` : null}
-      ${this.name === 'Yoyo' ? html `<form-b></form-b>` : null}
-      ${this.name === 'Bongo' ? html `<form-c></form-c>` : null} -->
-      ${this.renderedForm()}
+      <!-- ${this.renderedForm()} -->
+      <form-c breakableTitle=${this.newBreak}></form-c>
     `;
     }
 };
 __decorate([
     property({ type: String, attribute: true })
 ], CoolElement.prototype, "name", void 0);
+__decorate([
+    property({ type: String, attribute: true })
+], CoolElement.prototype, "newBreak", void 0);
 CoolElement = __decorate([
     customElement('cool-element')
 ], CoolElement);
